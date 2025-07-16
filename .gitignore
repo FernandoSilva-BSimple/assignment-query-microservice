@@ -1,0 +1,43 @@
+# Build
+bin/
+obj/
+*.exe
+*.dll
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+.history/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+.nuget/
+
+# Test results
+TestResults/
+*.coverage
+
+# Docker
+**/docker-compose.override.yml
+**/*.db
+**/Dockerfile.*
+**/docker-compose.*
+
+# EF Migrations
+Migrations/
+
+# Others
+*.sqlite
+.env
