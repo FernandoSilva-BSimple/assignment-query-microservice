@@ -7,6 +7,7 @@ public interface IAssignmentService
 {
     Task<Result<IEnumerable<AssignmentDTO>>> GetAllAsync();
     Task<Result<IEnumerable<AssignmentDetailsDTO>>> GetAllWithDetailsAsync();
+    Task<Result<IEnumerable<AssignmentDetailsDTO>>> GetAllWithDetailsByCollaboratorIdAsync(Guid collaboratorId);
     Task<Result<AssignmentDTO>> AddConsumedDeviceAsync(AssignmentDTO assignmentDTO);
     Task<Result<AssignmentDTO>> UpdateConsumedDeviceAsync(AssignmentDTO assignmentDTO);
     Task<Result<AssignmentDTO>> GetByIdAsync(Guid id);

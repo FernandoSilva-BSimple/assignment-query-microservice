@@ -103,6 +103,44 @@ public class AssignmentService : IAssignmentService
         return Result<AssignmentDetailsDTO>.Success(detailsDTO);
     }
 
+
+
+    public async Task<Result<IEnumerable<AssignmentDetailsDTO>>> GetAllWithDetailsByCollaboratorIdAsync(Guid collaboratorId)
+    {
+        var assignments = await _assignmentRepository.GetAllAsync();
+        var filteredAssignments = assignments.Where(a => a.CollaboratorId == collaboratorId);
+
+        var result = new List<AssignmentDetailsDTO>();
+
+        foreach (var assignment in filteredAssignments)
+        {
+            var collaborator = await _collaboratorRepository.GetByIdAsync(assignment.CollaboratorId);
+            if (collaborator == null) throw new Exception("Collaborator not found.");
+
+            var user = await _userRepository.GetByIdAsync(collaborator.UserId);
+            if (user == null) throw new Exception("User not found.");
+
+            var device = await _deviceRepository.GetByIdAsync(assignment.DeviceId);
+            if (device == null) throw new Exception("Device not found.");
+
+            result.Add(new AssignmentDetailsDTO(
+                assignment.Id,
+                assignment.DeviceId,
+                assignment.CollaboratorId,
+                assignment.PeriodDate,
+                user.Name,
+                user.Email,
+                device.DeviceDescription,
+                device.DeviceBrand,
+                device.DeviceModel,
+                device.DeviceSerialNumber
+            ));
+        }
+
+        return Result<IEnumerable<AssignmentDetailsDTO>>.Success(result);
+    }
+
+
     public async Task<Result<IEnumerable<AssignmentDetailsDTO>>> GetAllWithDetailsAsync()
     {
         var assignments = await _assignmentRepository.GetAllAsync();
