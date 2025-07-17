@@ -40,7 +40,7 @@ public class AssignmentRepository : IAssignmentRepository
     public async Task<IAssignment> AddAsync(IAssignment assignment)
     {
         var assignmentDM = _mapper.Map<AssignmentDataModel>(assignment);
-        _context.Set<AssignmentDataModel>().Add(assignmentDM);
+        await _context.Set<AssignmentDataModel>().AddAsync(assignmentDM);
         await _context.SaveChangesAsync();
         var assignmentAdded = _assignmentFactory.Create(assignmentDM);
         return assignmentAdded;

@@ -6,7 +6,7 @@ namespace Domain.IRepository;
 public interface ICollaboratorRepository
 {
     Task<ICollaborator?> GetByIdAsync(Guid id);
-    Task<ICollaborator> GetAllAsync();
+    Task<IEnumerable<ICollaborator>> GetAllAsync();
     Task<ICollaborator> CreateAsync(ICollaborator collaborator);
     Task<ICollaborator?> GetByUserIdAsync(Guid userId);
 }

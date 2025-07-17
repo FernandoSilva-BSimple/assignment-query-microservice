@@ -6,6 +6,6 @@ namespace Domain.IRepository;
 public interface IUserRepository
 {
     Task<IUser?> GetByIdAsync(Guid id);
-    Task<IUser> GetAllAsync();
-    Task<IUser> CreateAsync(ICollaborator collaborator);
+    Task<IEnumerable<IUser>> GetAllAsync();
+    Task<IUser> CreateAsync(IUser user);
 }

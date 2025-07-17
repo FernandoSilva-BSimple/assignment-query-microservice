@@ -6,6 +6,6 @@ namespace Domain.IRepository;
 public interface IDeviceRepository
 {
     Task<IDevice?> GetByIdAsync(Guid id);
-    Task<IDevice> GetAllAsync();
-    Task<IDevice> CreateAsync(ICollaborator collaborator);
+    Task<IEnumerable<IDevice>> GetAllAsync();
+    Task<IDevice> CreateAsync(IDevice device);
 }

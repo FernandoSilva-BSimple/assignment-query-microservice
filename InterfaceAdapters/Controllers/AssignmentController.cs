@@ -53,5 +53,17 @@ public class AssignmentController : ControllerBase
         return assignments.ToActionResult();
     }
 
+    [HttpGet("{id}/details")]
+    public async Task<ActionResult<AssignmentDetailsDTO>> GetAssignmentDetailsAsync(Guid id)
+    {
+        var assignmentDetails = await _assignmentService.GetAssignmentDetailsAsync(id);
+        return assignmentDetails.ToActionResult();
+    }
 
+    [HttpGet("with-details")]
+    public async Task<ActionResult<IEnumerable<AssignmentDetailsDTO>>> GetAllWithDetailsAsync()
+    {
+        var assignmentDetails = await _assignmentService.GetAllWithDetailsAsync();
+        return assignmentDetails.ToActionResult();
+    }
 }
