@@ -4,10 +4,10 @@ namespace Domain.Models;
 
 public class Assignment : IAssignment
 {
-    public Guid Id { get; private set; }
-    public Guid DeviceId { get; private set; }
-    public Guid CollaboratorId { get; private set; }
-    public PeriodDate PeriodDate { get; private set; }
+    public Guid Id { get; set; }
+    public Guid DeviceId { get; set; }
+    public Guid CollaboratorId { get; set; }
+    public PeriodDate PeriodDate { get; set; }
 
     public Assignment(Guid id, Guid deviceId, Guid collaboratorId, PeriodDate periodDate)
     {
