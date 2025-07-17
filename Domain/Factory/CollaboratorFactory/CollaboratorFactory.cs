@@ -5,7 +5,7 @@ using Domain.Visitor;
 
 namespace Domain.Factory.AssignmentFactory;
 
-public class CollaboratorFactory
+public class CollaboratorFactory : ICollaboratorFactory
 {
 
     public CollaboratorFactory()
