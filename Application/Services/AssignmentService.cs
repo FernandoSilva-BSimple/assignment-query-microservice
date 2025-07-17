@@ -107,17 +107,20 @@ public class AssignmentService : IAssignmentService
     {
         var assignments = await _assignmentRepository.GetAllAsync();
 
-        var tasks = assignments.Select(async assignment =>
+        var result = new List<AssignmentDetailsDTO>();
+
+        foreach (var assignment in assignments)
         {
             var collaborator = await _collaboratorRepository.GetByIdAsync(assignment.CollaboratorId);
             if (collaborator == null) throw new Exception("Collaborator not found.");
 
             var user = await _userRepository.GetByIdAsync(collaborator.UserId);
             if (user == null) throw new Exception("User not found.");
+
             var device = await _deviceRepository.GetByIdAsync(assignment.DeviceId);
             if (device == null) throw new Exception("Device not found.");
 
-            return new AssignmentDetailsDTO(
+            result.Add(new AssignmentDetailsDTO(
                 assignment.Id,
                 assignment.DeviceId,
                 assignment.CollaboratorId,
@@ -128,10 +131,11 @@ public class AssignmentService : IAssignmentService
                 device.DeviceBrand,
                 device.DeviceModel,
                 device.DeviceSerialNumber
-            );
-        });
+            ));
+        }
 
-        return Result<IEnumerable<AssignmentDetailsDTO>>.Success(await Task.WhenAll(tasks));
+        return Result<IEnumerable<AssignmentDetailsDTO>>.Success(result);
     }
+
 
 }
