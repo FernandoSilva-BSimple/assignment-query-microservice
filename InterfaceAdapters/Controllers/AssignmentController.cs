@@ -60,6 +60,13 @@ public class AssignmentController : ControllerBase
         return assignmentDetails.ToActionResult();
     }
 
+    [HttpGet("collaborator/{collaboratorId}/details")]
+    public async Task<ActionResult<IEnumerable<AssignmentDetailsDTO>>> GetAllWithDetailsByCollaboratorIdAsync(Guid collaboratorId)
+    {
+        var result = await _assignmentService.GetAllWithDetailsByCollaboratorIdAsync(collaboratorId);
+        return result.ToActionResult();
+    }
+
     [HttpGet("with-details")]
     public async Task<ActionResult<IEnumerable<AssignmentDetailsDTO>>> GetAllWithDetailsAsync()
     {
